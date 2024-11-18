@@ -161,8 +161,8 @@ vim.opt.tabstop = 4
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Set jk to <Esc>
-vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
+-- Set jj to <Esc>
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true

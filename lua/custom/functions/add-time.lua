@@ -8,13 +8,24 @@ local function add_time()
   endMin = tonumber(endMin)
 
   -- Calculate new time
-  local totalHours = endHour - startHour
-  local totalMins = math.abs(endMin - startMin)
+  local totalMins
+  local totalHours
+
+  if startMin > endMin then
+    endHour = endHour - 1
+    endMin = endMin + 60
+  end
+
+  totalMins = math.abs(endMin - startMin)
+  totalHours = math.abs(endHour - startHour)
+
   local strTotal = ''
-  if totalHours > 0 then
-    strTotal = '[' .. totalHours .. 'h' .. totalMins .. 'm] '
-  else
+  if totalHours == 0 then
     strTotal = '[' .. totalMins .. 'm] '
+  elseif totalMins == 0 then
+    strTotal = '[' .. totalHours .. 'h] '
+  else
+    strTotal = '[' .. totalHours .. 'h' .. totalMins .. 'm] '
   end
 
   -- Get position in line where new time should go
