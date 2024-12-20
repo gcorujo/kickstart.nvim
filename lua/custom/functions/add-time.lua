@@ -1,3 +1,35 @@
+local function add_resume()
+  -- local buf_name = vim.api.nvim_buf_get_name(0)
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local curr_line_index = pos[1]
+  local offset = 10
+  local lines = vim.api.nvim_buf_get_lines(0, curr_line_index - offset, curr_line_index + offset, true)
+
+  -- Getting first and last line of paragraph
+  local first_line_index, last_line_index
+  for i = 1, offset do
+    if lines[offset - i] == '' then
+      first_line_index = curr_line_index - i
+      break
+    end
+  end
+  for j = 1, offset do
+    if lines[offset + j] == '' then
+      last_line_index = curr_line_index + j
+      break
+    end
+  end
+
+  -- Getting only paragraph lines and iteratring through it
+  local lines = vim.api.nvim_buf_get_lines(0, first_line_index, last_line_index - 1, true)
+  local tareas = {}
+  for _, line in ipairs(lines) do
+    local tarea = string.match(line, '^.*-%s*([%w%d ]+)%s*-.*')
+    tareas[tarea] = line
+    print(tarea)
+  end
+end
+
 local function add_time()
   -- Parse line to get start and end time
   local line = vim.api.nvim_get_current_line()
@@ -40,6 +72,8 @@ local function add_time()
   vim.api.nvim_buf_set_text(0, row - 1, totalTimePos, row - 1, totalTimePos, { strTotal })
 
   print 'Total Time Added!'
+
+  add_resume()
 end
 
 return {
