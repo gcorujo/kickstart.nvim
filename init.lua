@@ -224,7 +224,7 @@ vim.opt.rtp:prepend(lazypath)
 require 'functions.add-time'
 
 vim.keymap.set('n', '<leader>kf', function()
-  require('custom.functions.add-time').add_time()
+  require('functions.add-time').add_time()
 end, { desc = 'Add Total Time in current cursor' })
 
 -- [[ Configure and install plugins ]]
@@ -913,7 +913,7 @@ require('lazy').setup({
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+  --  Uncomment the following line and add your plugins to `lua/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'plugins' },
 }, {
